@@ -6,50 +6,96 @@ import { notifications } from '@mantine/notifications';
 import { ModelForm } from './ModelForm';
 import axios from 'axios';
 import { useState } from 'react';
+import lighthouse from '@lighthouse-web3/sdk';
 
-const AddModel = ({refetchParent, problems, types}) => {
+const apiKey = 'YOUR_API_KEY_HERE';
+
+const AddModel = ({ refetchParent, problems, types }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [isPending, setIsPending] = useState(false);
-  const {isPending: pendingCreation, mutateAsync: createAsync} = useApiAimodelsCreate();
-  
-  
+  const { isPending: pendingCreation, mutateAsync: createAsync } =
+    useApiAimodelsCreate();
 
-  const createModel = async (payload: any) => {
-    console.log(payload);
+  // Function to upload file to Lighthouse
+  const uploadToLighthouse = async (file) => {
+    try {
+      const uploadResponse = await lighthouse.upload(file, apiKey);
+      console.log(uploadResponse);
+      return uploadResponse.data.Hash;
+    } catch (error) {
+      throw new Error('Lighthouse upload failed');
+    }
+  };
+
+  // Function to post data to the database
+  const postToDatabase = async (payload, fileHash) => {
     const formData = new FormData();
     formData.append('file', payload.file);
     formData.append('name', payload.name);
     formData.append('description', payload.description);
     formData.append('problem', payload.problem);
     formData.append('type', payload.type);
+    formData.append('fileHash', fileHash);
     formData.append('accuracy', '75.2');
-    setIsPending(true);
-    axios.post('http://localhost:8000/api/aimodels/', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    }).then(() => {
-        close();
-        notifications.show({message: 'Model deployed successfully', color: 'green'});
-        if (refetchParent) refetchParent();
-    }).catch((error: any) => {
-        notifications.show({message: `Model deployment failed: ${JSON.stringify(error.response?.data)}`, color: 'red'});
-    }).finally(() => {
-        setIsPending(false);
+
+    await axios.post('http://localhost:8000/api/aimodels/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
+  };
 
-};
+  // Function to handle form submission
+  const createModel = async (payload) => {
+    try {
+      setIsPending(true);
 
+      // Upload file to Lighthouse
+      const fileHash = await uploadToLighthouse(payload.file);
+
+      // Post data to the database
+      await postToDatabase(payload, fileHash);
+
+      close();
+      notifications.show({
+        message: 'Model deployed successfully',
+        color: 'green',
+      });
+      if (refetchParent) refetchParent();
+    } catch (error) {
+      notifications.show({
+        message: `Model deployment failed: ${error.message}`,
+        color: 'red',
+      });
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   return (
     <>
       <Modal opened={opened} onClose={close} title="Deploy a model">
-        <LoadingOverlay visible={isPending} zIndex={1000}/>
-        <ModelForm actionFunction={createModel} problems={problems} types={types} />
+        <LoadingOverlay visible={isPending} zIndex={1000} />
+        <ModelForm
+          actionFunction={createModel}
+          problems={problems}
+          types={types}
+        />
       </Modal>
-      <Button onClick={open} justify="center"  radius={'xl'} rightSection={<IconUpload size={20}/>} style={{maxWidth: 300, margin: 'auto'}} variant="outline" mt="lg" mb='sm'>Deploy your own model</Button>
-      </>
+      <Button
+        onClick={open}
+        justify="center"
+        radius={'xl'}
+        rightSection={<IconUpload size={20} />}
+        style={{ maxWidth: 300, margin: 'auto' }}
+        variant="outline"
+        mt="lg"
+        mb="sm"
+      >
+        Deploy your own model
+      </Button>
+    </>
   );
-}
+};
 
 export { AddModel };
