@@ -31,7 +31,7 @@ export function TableReviews({
           </Anchor>
         </Table.Td>
         <Table.Td>
-          <Link href={'asd'}>View ({row.total_models})</Link>
+          View ({row.total_models})
         </Table.Td>
         <Table.Td>
           <Anchor component="button" fz="sm">

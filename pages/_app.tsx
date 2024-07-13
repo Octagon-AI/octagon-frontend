@@ -1,68 +1,47 @@
-import "@mantine/core/styles.css";
-import Head from "next/head";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { HeaderMegaMenu } from "../lib/HeaderMegaMenu/HeaderMegaMenu";
-import {
-  MantineProvider,
-  createTheme,
-  MantineColorsTuple,
-  Button,
-  useMantineTheme,
-  Container,
-} from "@mantine/core";
-import { FooterLinks } from "../lib/FooterLinks/FooterLinks";
-import { useEffect, useRef } from "react";
+import '@mantine/core/styles.css';
+import Head from 'next/head';
+import { HeaderMegaMenu } from '../lib/HeaderMegaMenu/HeaderMegaMenu';
+import { MantineProvider, createTheme, Container } from '@mantine/core';
+import { FooterLinks } from '../lib/FooterLinks/FooterLinks';
+import { useEffect, useRef } from 'react';
 import {
   DynamicContextProvider,
   DynamicWidget,
-} from "@dynamic-labs/sdk-react-core";
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
-import { EthersExtension } from "@dynamic-labs/ethers-v5";
-import { Notifications } from "@mantine/notifications";
-import { ModalsProvider } from "@mantine/modals";
+} from '@dynamic-labs/sdk-react-core';
+import { EthereumWalletConnectors } from '@dynamic-labs/ethereum';
+import { EthersExtension } from '@dynamic-labs/ethers-v5';
+import { Notifications } from '@mantine/notifications';
+import { ModalsProvider } from '@mantine/modals';
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
-} from "@tanstack/react-query";
-import "@mantine/notifications/styles.css";
-import "../public/overrides.css";
-import { GlobalProvider } from "../contexts/globalContext";
-
+} from '@tanstack/react-query';
+import '@mantine/notifications/styles.css';
+import '../public/overrides.css';
+import { GlobalProvider } from '../contexts/globalContext';
+import './globals.css';
+import type { AppProps } from 'next/app';
 
 const theme = createTheme({
-  fontFamily: "Open Sans, sans-serif",
+  fontFamily: 'Open Sans, sans-serif',
   colors: {
     blue: [
-      "#ffeaec",
-      "#fdd4d6",
-      "#f4a7ac",
-      "#ec777e",
-      "#e64f57",
-      "#e3353f",
-      "#e22732",
-      "#c91a25",
-      "#b31220",
-      "#9e0419",
+      '#ffeaec',
+      '#bee3f8',
+      '#90cdf4',
+      '#63b3ed',
+      '#4299e1',
+      '#3182ce',
+      '#2b6cb0',
+      '#2c5282',
+      '#2a4365',
+      '#1A365D',
     ],
   },
 });
-=======
-import { MantineProvider } from "@mantine/core";
-import { theme } from "../theme";
->>>>>>> parent of dd22bce (first page)
-=======
-import { MantineProvider } from "@mantine/core";
-import { theme } from "../theme";
->>>>>>> parent of dd22bce (first page)
-=======
-import { MantineProvider } from "@mantine/core";
-import { theme } from "../theme";
->>>>>>> parent of dd22bce (first page)
 
-export default function App({ Component, pageProps }: any) {
+export default function App({ Component, pageProps }: AppProps) {
   const cssOverrides = `
   .button--padding-large {
     padding: 0.66rem 1rem;
@@ -72,10 +51,10 @@ export default function App({ Component, pageProps }: any) {
   const vantaRef = useRef(null);
 
   useEffect(() => {
-    let vantaEffect;
+    let vantaEffect: any;
     const loadVanta = () => {
       if (vantaRef.current && !vantaEffect) {
-        vantaEffect = window.VANTA.NET({
+        vantaEffect = window.VANTA.GLOBE({
           el: vantaRef.current,
           mouseControls: true,
           touchControls: true,
@@ -84,14 +63,14 @@ export default function App({ Component, pageProps }: any) {
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          color: 0xe64f57,
-          backgroundColor: 0x242424,
+          color: 0x3eadec,
+          backgroundColor: 0x1b1b22,
         });
       }
     };
 
     // Load Vanta after the scripts are loaded
-    if (typeof window !== "undefined" && window.VANTA) {
+    if (typeof window !== 'undefined' && window.VANTA) {
       loadVanta();
     }
 
@@ -101,9 +80,6 @@ export default function App({ Component, pageProps }: any) {
   }, []);
 
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     <QueryClientProvider
       client={
         new QueryClient({
@@ -118,71 +94,60 @@ export default function App({ Component, pageProps }: any) {
     >
       <MantineProvider theme={theme} forceColorScheme="dark">
         <GlobalProvider>
-        <ModalsProvider>
-          <Head>
-            <title>Octagon AI - Where your AI project lives.</title>
-            <meta
-              name="viewport"
-              content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-            />
-            <link rel="shortcut icon" href="/favicon.svg" />
-          </Head>
-          <DynamicContextProvider
-            settings={{
-              environmentId: "a2dea8be-028b-4848-a65f-a57fe56a8770",
-              walletConnectors: [EthereumWalletConnectors],
-              walletConnectorExtensions: [EthersExtension],
-              cssOverrides: cssOverrides,
-            }}
-          >
-            <HeaderMegaMenu />
-            <Container fluid>
+          <ModalsProvider>
+            <Head>
+              <title>Octagon AI - Where your AI project lives.</title>
+              <meta
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+              />
+              <link rel="shortcut icon" href="/favicon.svg" />
+            </Head>
+            <DynamicContextProvider
+              settings={{
+                environmentId: 'a2dea8be-028b-4848-a65f-a57fe56a8770',
+                walletConnectors: [EthereumWalletConnectors],
+                walletConnectorExtensions: [EthersExtension],
+                cssOverrides: cssOverrides,
+              }}
+            >
+              <HeaderMegaMenu />
               <div
                 ref={vantaRef}
                 style={{
-                  width: "100%",
-                  height: "90vh",
-                  position: "relative",
-                  display: "flex",
-                  overflow: "scroll",
+                  position: 'fixed',
+                  width: '100%',
+                  height: '100vh',
+                  zIndex: -1,
                 }}
               >
                 <div
                   style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    justifyContent: "center",
+                    position: 'relative',
+                    width: '100%',
+                    minHeight: '100vh',
+                    overflow: 'auto',
                   }}
                 >
-                  <Component {...pageProps} />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Component {...pageProps} />
+                  </div>
                 </div>
               </div>
-            </Container>
-            <FooterLinks />
-          </DynamicContextProvider>
-          <Notifications />
-        </ModalsProvider>
+              {/* <FooterLinks /> */}
+            </DynamicContextProvider>
+            <Notifications />
+          </ModalsProvider>
         </GlobalProvider>
       </MantineProvider>
     </QueryClientProvider>
-=======
-=======
->>>>>>> parent of dd22bce (first page)
-=======
->>>>>>> parent of dd22bce (first page)
-    <MantineProvider theme={theme}>
-      <Head>
-        <title>Mantine Template</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
-        <link rel="shortcut icon" href="/favicon.svg" />
-      </Head>
-      <Component {...pageProps} />
-    </MantineProvider>
->>>>>>> parent of dd22bce (first page)
   );
 }
