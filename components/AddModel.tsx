@@ -24,20 +24,24 @@ const AddModel = ({ refetchParent, problems, types }) => {
       console.log(percentageDone);
     };
 
+    console.log('Uploading to Lighthouse...');
+    console.log(file);
+    console.log(apiKey);
+
     try {
-      const uploadResponse = await lighthouse.upload(
+      const response = await lighthouse.upload(
         file,
         apiKey,
-        false,
+        true,
         undefined,
         progressCallback
       );
-      console.log(uploadResponse);
+      console.log(response);
       console.log(
         'Visit at https://gateway.lighthouse.storage/ipfs/' +
-          uploadResponse.data.Hash
+          response.data[0].Hash
       );
-      return uploadResponse.data.Hash;
+      return response.data[0].Hash;
     } catch (error) {
       throw new Error('Lighthouse upload failed');
     }

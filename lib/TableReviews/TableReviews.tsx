@@ -24,15 +24,13 @@ export function TableReviews({
     const negativeReviews = 100 - best_accuracy;
 
     return (
-      <Table.Tr key={row.name}>
+      <Table.Tr key={row.id}>
         <Table.Td>
           <Anchor component="button" fz="sm">
             {row.name}
           </Anchor>
         </Table.Td>
-        <Table.Td>
-          View ({row.total_models})
-        </Table.Td>
+        <Table.Td>View ({row.total_models})</Table.Td>
         <Table.Td>
           <Anchor component="button" fz="sm">
             {row.description}
