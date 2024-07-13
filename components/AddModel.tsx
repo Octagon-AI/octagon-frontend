@@ -55,22 +55,29 @@ const AddModel = ({ refetchParent, problems, types }) => {
     console.log(file);
     console.log(apiKey);
 
+    const encryptionAuth = await signAuthMessage();
+    if (!encryptionAuth) {
+      console.error('Failed to sign the message.');
+      return;
+    }
+
+    const { signature, signerAddress } = encryptionAuth;
+
     try {
-      const response = await lighthouse.upload(
-        file,
+      const output = await lighthouse.uploadEncrypted(
+        [file],
         apiKey,
-        true,
-        undefined,
+        signerAddress,
+        signature.toString(),
         progressCallback
       );
-      console.log(response);
+      console.log(output);
       console.log(
-        'Visit at https://gateway.lighthouse.storage/ipfs/' +
-          response.data[0].Hash
+        `Decrypt at https://decrypt.mesh3.network/evm/${output.data[0].Hash}`
       );
-      return response.data[0].Hash;
+      return output.data[0].Hash;
     } catch (error) {
-      throw new Error('Lighthouse upload failed');
+      console.error('Error uploading encrypted file:', error);
     }
   };
 
