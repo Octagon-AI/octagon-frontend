@@ -1,8 +1,8 @@
 import lighthouse from '@lighthouse-web3/sdk';
 
-const apiKey = 'YOUR_API_KEY_HERE'; // Replace with your actual API key
+const apiKey = 'f9aa7723.749dd94a4bad4392a947dc5aed3c24db';
 
-export const handleSubmit = async (values, actionFunction) => {
+export const uploadFileTo = async (values, actionFunction) => {
   if (values.file) {
     try {
       const uploadResponse = await lighthouse.upload(values.file, apiKey);

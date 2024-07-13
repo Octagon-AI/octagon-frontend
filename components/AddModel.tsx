@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import lighthouse from '@lighthouse-web3/sdk';
 
-const apiKey = 'YOUR_API_KEY_HERE';
+const apiKey = 'f9aa7723.749dd94a4bad4392a947dc5aed3c24db';
 
 const AddModel = ({ refetchParent, problems, types }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -16,11 +16,27 @@ const AddModel = ({ refetchParent, problems, types }) => {
   const { isPending: pendingCreation, mutateAsync: createAsync } =
     useApiAimodelsCreate();
 
-  // Function to upload file to Lighthouse
+  // Function to upload file to Lighthouse with progress callback
   const uploadToLighthouse = async (file) => {
+    const progressCallback = (progressData) => {
+      let percentageDone =
+        100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
+      console.log(percentageDone);
+    };
+
     try {
-      const uploadResponse = await lighthouse.upload(file, apiKey);
+      const uploadResponse = await lighthouse.upload(
+        file,
+        apiKey,
+        false,
+        undefined,
+        progressCallback
+      );
       console.log(uploadResponse);
+      console.log(
+        'Visit at https://gateway.lighthouse.storage/ipfs/' +
+          uploadResponse.data.Hash
+      );
       return uploadResponse.data.Hash;
     } catch (error) {
       throw new Error('Lighthouse upload failed');
