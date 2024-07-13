@@ -8,7 +8,34 @@ import axios from 'axios';
 import { useState } from 'react';
 import lighthouse from '@lighthouse-web3/sdk';
 
-const apiKey = 'f9aa7723.749dd94a4bad4392a947dc5aed3c24db';
+const apiKey = process.env.NEXT_PUBLIC_LIGHTHOUSE_API_KEY ?? '';
+
+// Function to sign the authentication message using Wallet
+const signAuthMessage = async () => {
+  if (window.ethereum) {
+    try {
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+      if (accounts.length === 0) {
+        throw new Error('No accounts returned from Wallet.');
+      }
+      const signerAddress = accounts[0];
+      const { message } = (await lighthouse.getAuthMessage(signerAddress)).data;
+      const signature = await window.ethereum.request({
+        method: 'personal_sign',
+        params: [message, signerAddress],
+      });
+      return { signature, signerAddress };
+    } catch (error) {
+      console.error('Error signing message with Wallet', error);
+      return null;
+    }
+  } else {
+    console.log('Please install Wallet!');
+    return null;
+  }
+};
 
 const AddModel = ({ refetchParent, problems, types }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -113,6 +140,18 @@ const AddModel = ({ refetchParent, problems, types }) => {
         mb="sm"
       >
         Deploy your own model
+      </Button>
+      <Button
+        onClick={signAuthMessage}
+        justify="center"
+        radius={'xl'}
+        rightSection={<IconUpload size={20} />}
+        style={{ maxWidth: 300, margin: 'auto' }}
+        variant="outline"
+        mt="lg"
+        mb="sm"
+      >
+        Sign Auth Message
       </Button>
     </>
   );
