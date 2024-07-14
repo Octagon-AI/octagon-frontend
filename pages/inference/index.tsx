@@ -78,7 +78,7 @@ const Inference: React.FC = (props) => {
             { updateTx &&
                 <>
                 <Text mt='sm'>Transaction hash: {updateTx}</Text>
-                <a href={`https://sepolia.etherscan.io/tx/${updateTx}`} target="_blank">View on Etherscan</a>
+                <a href={`https://eth-sepolia.blockscout.com/tx/${updateTx}`} target="_blank">View on Blockscout</a>
                 </>
             }
             </Card>

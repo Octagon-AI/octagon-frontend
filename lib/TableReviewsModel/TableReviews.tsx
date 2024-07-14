@@ -242,10 +242,10 @@ export function TableReviews({ services, isLoading, refetchParent }) {
           <>
             <Text>Verifier address: {verifierAddress}</Text>
             <a
-              href={`https://sepolia.etherscan.io/address/${verifierAddress}`}
+              href={`https://eth-sepolia.blockscout.com/address/${verifierAddress}`}
               target="_blank"
             >
-              View on Etherscan
+              View on Blockscout
             </a>
           </>
         )}
@@ -264,10 +264,10 @@ export function TableReviews({ services, isLoading, refetchParent }) {
           <>
             <Text>Strategy address: {strategyAddress}</Text>
             <a
-              href={`https://sepolia.etherscan.io/address/${strategyAddress}`}
+              href={`https://eth-sepolia.blockscout.com/address/${strategyAddress}`}
               target="_blank"
             >
-              View on Etherscan
+              View on Blockscout
             </a>
           </>
         )}
@@ -287,10 +287,10 @@ export function TableReviews({ services, isLoading, refetchParent }) {
           <>
             <Text>Transaction hash: {depositTx}</Text>
             <a
-              href={`https://sepolia.etherscan.io/tx/${depositTx}`}
+              href={`https://eth-sepolia.blockscout.com/tx/${depositTx}`}
               target="_blank"
             >
-              View on Etherscan
+              View on Blockscout
             </a>
           </>
         )}
@@ -308,7 +308,7 @@ export function TableReviews({ services, isLoading, refetchParent }) {
           { updateTx &&
             <>
               <Text>Transaction hash: {updateTx}</Text>
-              <a href={`https://sepolia.etherscan.io/tx/${updateTx}`} target="_blank">View on Etherscan</a>
+              <a href={`https://eth-sepolia.blockscout.com/tx/${updateTx}`} target="_blank">View on Blockscout</a>
             </>
           } */}
 
