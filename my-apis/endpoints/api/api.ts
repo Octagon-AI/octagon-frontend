@@ -1378,7 +1378,7 @@ export const apiVerifyCreate = (
   verifyModel: BodyType<VerifyModel>
 ) => {
   return customInstance<VerifyModel>({
-    url: `/api/verify/${id}`,
+    url: `/api/verify/${id}/`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     data: verifyModel,

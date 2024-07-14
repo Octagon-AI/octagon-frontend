@@ -148,18 +148,6 @@ const AddModel = ({ refetchParent, problems, types }) => {
       >
         Deploy your own model
       </Button>
-      <Button
-        onClick={signAuthMessage}
-        justify="center"
-        radius={'xl'}
-        rightSection={<IconUpload size={20} />}
-        style={{ maxWidth: 300, margin: 'auto' }}
-        variant="outline"
-        mt="lg"
-        mb="sm"
-      >
-        Sign Auth Message
-      </Button>
     </>
   );
 };
