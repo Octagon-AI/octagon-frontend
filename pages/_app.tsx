@@ -1,7 +1,7 @@
 import '@mantine/core/styles.css';
 import Head from 'next/head';
 import { HeaderMegaMenu } from '../lib/HeaderMegaMenu/HeaderMegaMenu';
-import { MantineProvider, createTheme, Container } from '@mantine/core';
+import { MantineProvider, createTheme, Container, Group } from '@mantine/core';
 import { FooterLinks } from '../lib/FooterLinks/FooterLinks';
 import { useEffect, useRef } from 'react';
 import {
@@ -22,6 +22,7 @@ import '../public/overrides.css';
 import { GlobalProvider } from '../contexts/globalContext';
 import './globals.css';
 import type { AppProps } from 'next/app';
+import ReactMarkdown from 'react-markdown';
 
 const theme = createTheme({
   fontFamily: 'Open Sans, sans-serif',
@@ -115,7 +116,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <div
                 ref={vantaRef}
                 style={{
-                  position: 'fixed',
+                  // position: 'fixed',
                   width: '100%',
                   height: '100vh',
                   zIndex: -1,
@@ -123,7 +124,7 @@ export default function App({ Component, pageProps }: AppProps) {
               >
                 <div
                   style={{
-                    position: 'relative',
+                    // position: 'relative',
                     width: '100%',
                     minHeight: '100vh',
                     overflow: 'auto',
@@ -131,7 +132,8 @@ export default function App({ Component, pageProps }: AppProps) {
                 >
                   <div
                     style={{
-                      position: 'absolute',
+                      marginTop: '100px',
+                      // position: 'absolute',
                       width: '100%',
                       height: '100%',
                       display: 'flex',
@@ -142,7 +144,10 @@ export default function App({ Component, pageProps }: AppProps) {
                   </div>
                 </div>
               </div>
-              {/* <FooterLinks /> */}
+              <Group>
+                <ReactMarkdown># Hello, *world*!</ReactMarkdown>
+              </Group>
+              <FooterLinks />
             </DynamicContextProvider>
             <Notifications />
           </ModalsProvider>
