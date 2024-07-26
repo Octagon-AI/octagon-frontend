@@ -22,7 +22,7 @@ import '../public/overrides.css';
 import { GlobalProvider } from '../contexts/globalContext';
 import './globals.css';
 import type { AppProps } from 'next/app';
-import ReactMarkdown from 'react-markdown';
+import { FeaturesGrid } from './components/featuresSection';
 
 const theme = createTheme({
   fontFamily: 'Open Sans, sans-serif',
@@ -144,9 +144,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   </div>
                 </div>
               </div>
-              <Group>
-                <ReactMarkdown># Hello, *world*!</ReactMarkdown>
-              </Group>
+              <FeaturesGrid />
               <FooterLinks />
             </DynamicContextProvider>
             <Notifications />
