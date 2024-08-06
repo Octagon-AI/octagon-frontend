@@ -5,41 +5,43 @@ import classes from './featuresSectionStyle.module.css';
 export const MOCKDATA = [
   {
     icon: IconGauge,
-    title: 'Extreme performance',
+    title: 'Unparalleled Model Performance',
     description:
-      'This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit',
+      'Our platform ensures your AI models operate at peak performance, adapting to evolving data and improving continuously.',
   },
   {
     icon: IconUser,
-    title: 'Privacy focused',
+    title: 'User-Centric Privacy',
     description:
-      'People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma',
+      'We prioritize privacy, ensuring your model strategies remain confidential while still proving their effectiveness.',
   },
   {
     icon: IconCookie,
-    title: 'No third parties',
+    title: 'Direct Developer Engagement',
     description:
-      'They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves',
+      'By eliminating intermediaries, we enable direct interaction between model developers and users, fostering trust and collaboration.',
   },
   {
     icon: IconLock,
-    title: 'Secure by default',
+    title: 'Robust Security Measures',
     description:
-      'Although it still can’t fly, its jumping power is outstanding, in Alola the mushrooms on Paras don’t grow up quite right',
+      'Combining TEEs and ZK proofs, our platform guarantees the security and integrity of your models without compromising performance.',
   },
   {
     icon: IconMessage2,
-    title: '24/7 Support',
+    title: 'Real-Time Performance Metrics',
     description:
-      'Rapidash usually can be seen casually cantering in the fields and plains, Skitty is known to chase around after its own tail',
+      'Access detailed performance metrics for your AI models in real-time, allowing for immediate insights and adjustments.',
   },
   {
     icon: IconMessage2,
-    title: '24/7 Support',
+    title: 'Dynamic Model Selection',
     description:
-      'Rapidash usually can be seen casually cantering in the fields and plains, Skitty is known to chase around after its own tail',
+      'Our marketplace allows for flexible model selection based on user preferences, ensuring optimal performance for every use case.',
   },
 ];
+
+
 
 interface FeatureProps {
   icon: React.FC<any>;
