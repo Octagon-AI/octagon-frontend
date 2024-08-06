@@ -90,3 +90,7 @@ export function FeaturesGrid() {
     </Container>
   );
 }
+
+export default function IgnoreMe() {
+  return <></>;
+}
